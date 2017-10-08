@@ -1,0 +1,41 @@
+
+PunchingBag3.png
+size: 256,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Falling
+  rotate: false
+  xy: 2, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+Flash
+  rotate: false
+  xy: 36, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+OnBack
+  rotate: false
+  xy: 70, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+Stand1
+  rotate: false
+  xy: 70, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+Unsteady1
+  rotate: false
+  xy: 104, 2
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1

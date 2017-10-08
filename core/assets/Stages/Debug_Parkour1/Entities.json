@@ -1,0 +1,19 @@
+[
+	{
+		"class": "com.platform.Enemies.PunchingBag",
+		"x": 128,
+		"y": 96, 
+		"bagType": 1
+	},
+	{
+		"class": "com.platform.Enemies.PunchingBag",
+		"x": 200,
+		"y": 96, 
+		"bagType": 2
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 456,
+		"y": 48
+	},
+]

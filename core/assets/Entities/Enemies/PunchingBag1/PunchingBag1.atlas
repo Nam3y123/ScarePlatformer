@@ -1,0 +1,27 @@
+
+PunchingBag1.png
+size: 64,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Base
+  rotate: false
+  xy: 2, 2
+  size: 32, 9
+  orig: 32, 9
+  offset: 0, 0
+  index: -1
+Stand1
+  rotate: false
+  xy: 0, 13
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1
+Hurt
+  rotate: false
+  xy: 32, 13
+  size: 32, 48
+  orig: 32, 48
+  offset: 0, 0
+  index: -1

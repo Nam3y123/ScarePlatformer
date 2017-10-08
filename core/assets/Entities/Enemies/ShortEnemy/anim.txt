@@ -1,0 +1,66 @@
+Init
+LayerCount 3
+SetSprite Entities/Enemies/ShortEnemy/Temp.png
+Frame 0 0 0 32 32
+Frame 1 64 0 32 32
+Frame 2 32 0 32 32
+LayerPosSet 1 0 12
+LayerPosSet 0 0 24
+SetAnim Stand
+
+Anim Stand
+LayerMove 1 2 0
+LayerMove 0 4 0
+Frame 2 32 32 32 32
+Wait 2
+LayerMove 1 2 0
+LayerMove 0 4 0
+Frame 2 32 0 32 32
+Frame 1 0 32 32 32
+Wait 2
+LayerMove 1 2 0
+LayerMove 0 4 0
+Frame 1 0 0 32 32
+Frame 0 64 32 32 32
+Wait 2
+LayerMove 1 1 0
+LayerMove 0 2 0
+Frame 0 64 0 32 32
+Wait 2
+LayerMove 1 -1 0
+LayerMove 0 -2 0
+Wait 2
+LayerMove 1 -2 0
+LayerMove 0 -4 0
+Wait 2
+LayerMove 1 -2 0
+LayerMove 0 -4 0
+Wait 2
+LayerMove 1 -2 0
+LayerMove 0 -4 0
+Wait 2
+LayerMove 1 -2 0
+LayerMove 0 -4 0
+Wait 2
+LayerMove 1 -2 0
+LayerMove 0 -4 0
+Wait 2
+LayerMove 1 -2 0
+LayerMove 0 -4 0
+Wait 2
+LayerMove 1 -1 0
+LayerMove 0 -2 0
+Wait 2
+LayerMove 1 1 0
+LayerMove 0 2 0
+Wait 2
+LayerMove 1 2 0
+LayerMove 0 4 0
+Wait 2
+LayerMove 1 2 0
+LayerMove 0 4 0
+Wait 2
+LayerMove 1 2 0
+LayerMove 0 4 0
+Wait 2
+SetAnim Stand

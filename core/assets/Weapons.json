@@ -1,0 +1,20 @@
+[
+	{
+		"class": "com.platform.Weapon",
+		"active": 0,
+		"icon": [112, 0],
+		"color": -1
+	},
+	{
+		"class": "com.platform.Weapon",
+		"active": 1,
+		"icon": [100, 12],
+		"color": 3
+	},
+	{
+		"class": "com.platform.Weapon",
+		"active": 2,
+		"icon": [64, 12],
+		"color": 0
+	}
+]
