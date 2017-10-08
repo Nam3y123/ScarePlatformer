@@ -310,7 +310,7 @@ public class Player extends Actor {
                 }
                 swordSpr.draw(batch, parentAlpha);
             default:
-                if(onGround || weaponAnim < 8)
+                if(onGround || weaponAnim != 8)
                     weaponAnim++;
                 if(weaponAnim == 13)
                     weaponAnim = 0;
