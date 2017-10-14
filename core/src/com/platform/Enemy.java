@@ -15,7 +15,7 @@ import java.util.HashMap;
 import static com.platform.PlatformGame.manager;
 
 public class Enemy extends Actor {
-    private boolean hasInitiated;
+    protected boolean hasInitiated, playerEnteredRoom;
     protected String atlasLoc;
     protected Sprite spr;
     protected TextureAtlas atlas;
@@ -54,6 +54,7 @@ public class Enemy extends Actor {
         invinDur = 0;
         dmg = 1;
         hasInitiated = true;
+        playerEnteredRoom = false;
     }
 
     private void setCurFrame(String anim) {
@@ -90,7 +91,7 @@ public class Enemy extends Actor {
             }
             Rectangle enRect = new Rectangle(getX() + 2, getY() + 2, getWidth() - 4, getHeight() - 4);
             if(enRect.overlaps(player.getRect(true)))
-                player.takeDmg(dmg);
+                dmgPlayer();
         }
     }
 
@@ -129,6 +130,10 @@ public class Enemy extends Actor {
                 setVisible(false);
             }
         }
+    }
+
+    public void dmgPlayer() {
+        player.takeDmg(dmg);
     }
 
 

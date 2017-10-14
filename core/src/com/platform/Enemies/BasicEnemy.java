@@ -70,16 +70,17 @@ public class BasicEnemy extends Enemy {
         Pixmap col = gameStage.getCollision();
         Integer[] xColTiles = getXColTiles(true);
         Integer[] yColTiles = getYColTiles(false);
+        int height = gameStage.getCollision().getHeight() - 1;
         for(int xi = 0; xi < xColTiles.length; xi++) {
             for(int yi = 0; yi < yColTiles.length; yi++) {
-                int color = col.getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                int color = col.getPixel(xColTiles[xi], height - yColTiles[yi]);
                 while(color == Color.rgba8888(0, 0, 0, 1) && xMomentum != 0) {
                     if(xMomentum > 0)
                         xMomentum--;
                     else
                         xMomentum++;
                     xColTiles = getXColTiles(true);
-                    color = col.getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                    color = col.getPixel(xColTiles[xi], height - yColTiles[yi]);
                 }
             }
         }
@@ -94,9 +95,10 @@ public class BasicEnemy extends Enemy {
         Pixmap col = gameStage.getCollision();
         Integer[] xColTiles = getXColTiles(false);
         Integer[] yColTiles = getYColTiles(true);
+        int height = gameStage.getCollision().getHeight() - 1;
         for(int xi = 0; xi < xColTiles.length; xi++)
             for(int yi = 0; yi < yColTiles.length; yi++) {
-                int color = col.getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                int color = col.getPixel(xColTiles[xi], height - yColTiles[yi]);
                 while((color == Color.rgba8888(0, 0, 0, 1) || (color == Color.rgba8888(1/51f, 0, 0, 1) && yMomentum < 0
                         && yi == 0 && Math.floor(getY() / 24f) > yColTiles[0])) && yMomentum != 0) {
                     if(yMomentum < 0)
@@ -106,7 +108,7 @@ public class BasicEnemy extends Enemy {
                     else
                         yMomentum++;
                     yColTiles = getYColTiles(true);
-                    color = col.getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                    color = col.getPixel(xColTiles[xi], height - yColTiles[yi]);
                 }
             }
     }
@@ -114,13 +116,14 @@ public class BasicEnemy extends Enemy {
     protected void checkFloorEdge() {
         onGround = false;
         Pixmap col = gameStage.getCollision();
+        int height = gameStage.getCollision().getHeight() - 1;
         int xi;
         if(moveDir)
             xi = (int)Math.floor((getX() - 1) / 24);
         else
             xi = (int)Math.floor((getX() + getWidth()) / 24);
         int yi = (int)Math.floor((getY() - 1) / 24);
-        int color = col.getPixel(xi, 19 - yi);
+        int color = col.getPixel(xi, height - yi);
         if(color != Color.rgba8888(0, 0, 0, 1) && (color != Color.rgba8888(1/51f, 0, 0, 1))) {
             moveDir = !moveDir;
         }

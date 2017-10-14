@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
@@ -55,41 +56,43 @@ public class Player extends Actor {
             @Override
             public void draw(Batch batch, float parentAlpha) {
                 float x = mainGame.getCamera().position.x - 312;
+                float y = mainGame.getCamera().position.y - 240;
+                float alpha = (Player.this.getX() < x + 120 && Player.this.getY() <  y + 78) ? 0.33f : 0.66f;
 
                 spr.setRegion(0, 25, 60, 39);
                 spr.setSize(120, 78);
-                spr.setPosition(x, 0);
-                spr.draw(batch);
+                spr.setPosition(x, y);
+                spr.draw(batch, alpha);
 
                 int[] iconPos = weapons[curWeapon].getIcon();
                 spr.setRegion(iconPos[0], iconPos[1], 12, 12);
                 spr.setSize(24, 24);
-                spr.setPosition(x + 58, 26);
-                spr.draw(batch);
+                spr.setPosition(x + 58, y + 26);
+                spr.draw(batch, alpha);
 
                 if(weapons[curWeapon].getColor() != -1) {
                     spr.setRegion(14 * weapons[curWeapon].getColor(), 9, 14, 14);
                     spr.setSize(28, 28);
-                    spr.setPosition(x + 12, 50);
-                    spr.draw(batch);
+                    spr.setPosition(x + 12, y + 50);
+                    spr.draw(batch, alpha);
                 }
 
                 int width = (int)(52f * hp / (float)maxHp);
                 spr.setRegion(0, 0, width, 9);
                 spr.setSize(width * 2, 18);
-                spr.setPosition(x + 2, 2);
-                spr.draw(batch);
+                spr.setPosition(x + 2, y + 2);
+                spr.draw(batch, alpha);
 
                 label.setFontScale(0.35f);
-                label.setPosition(x + 4, 32);
+                label.setPosition(x + 4, y + 32);
                 label.setText(Integer.toString(mana[0]));
-                label.draw(batch, parentAlpha);
-                label.setPosition(x + 18, 32);
+                label.draw(batch, alpha);
+                label.setPosition(x + 18, y + 32);
                 label.setText(Integer.toString(mana[1]));
-                label.draw(batch, parentAlpha);
-                label.setPosition(x + 32, 32);
+                label.draw(batch, alpha);
+                label.setPosition(x + 32, y + 32);
                 label.setText(Integer.toString(mana[2]));
-                label.draw(batch, parentAlpha);
+                label.draw(batch, alpha);
             }
         };
         Timer.schedule(new Timer.Task() {
@@ -107,11 +110,11 @@ public class Player extends Actor {
         canMove = true;
         mana = new int[] {15, 0, 50};
         weaponList = json.fromJson(Array.class, Gdx.files.internal("Weapons.json"));
-        weapons = new Weapon[] {weaponList.get(1), weaponList.get(2), weaponList.get(0)};
+        weapons = new Weapon[] {weaponList.get(1), weaponList.get(2), weaponList.get(3)};
         this.mainGame = mainGame;
         weaponHeld = false;
-        hp = 3;
-        maxHp = 3;
+        hp = 20;
+        maxHp = 20;
         invinDur = 0;
     }
 
@@ -140,6 +143,9 @@ public class Player extends Actor {
                 break;
             case 2:
                 actFireball();
+                break;
+            case 3:
+                actVoidBall();
                 break;
             default:
                 break;
@@ -182,20 +188,21 @@ public class Player extends Actor {
 
         int[] xColTiles = getXColTiles(true);
         int[] yColTiles = getYColTiles(false);
+        int height = mainGame.getCollision().getHeight() - 1;
         for(int xi = 0; xi < 3; xi++) {
             for(int yi = 0; yi < (getHeight() == 48 ? 3 : 2); yi++) {
-                int color = mainGame.getCollision().getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                int color = mainGame.getCollision().getPixel(xColTiles[xi], height - yColTiles[yi]);
                 while(color == Color.rgba8888(0, 0, 0, 1) && xMomentum != 0) {
                     if(xMomentum > 0)
                         xMomentum--;
                     else
                         xMomentum++;
                     xColTiles = getXColTiles(true);
-                    color = mainGame.getCollision().getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                    color = mainGame.getCollision().getPixel(xColTiles[xi], height - yColTiles[yi]);
                 }
             }
             if(getHeight() == 24) {
-                int color = mainGame.getCollision().getPixel(xColTiles[xi], 19 - yColTiles[2]);
+                int color = mainGame.getCollision().getPixel(xColTiles[xi], height - yColTiles[2]);
                 if(color == Color.rgba8888(0, 0, 0, 1))
                     ceiling = true;
             }
@@ -211,7 +218,7 @@ public class Player extends Actor {
         yColTiles = getYColTiles(true);
         for(int xi = 0; xi < 3; xi++)
             for(int yi = 0; yi < (getHeight() == 48 ? 3 : 2); yi++) {
-                int color = mainGame.getCollision().getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                int color = mainGame.getCollision().getPixel(xColTiles[xi], height - yColTiles[yi]);
                 while((color == Color.rgba8888(0, 0, 0, 1) || (color == Color.rgba8888(1/51f, 0, 0, 1) && yMomentum < 0
                         && yi == 0 && Math.floor(getY() / 24f) > yColTiles[0])) && yMomentum != 0) {
                     if(yMomentum < 0)
@@ -221,7 +228,7 @@ public class Player extends Actor {
                     else
                         yMomentum++;
                     yColTiles = getYColTiles(true);
-                    color = mainGame.getCollision().getPixel(xColTiles[xi], 19 - yColTiles[yi]);
+                    color = mainGame.getCollision().getPixel(xColTiles[xi], height - yColTiles[yi]);
                 }
             }
         moveBy(0, yMomentum);
@@ -284,6 +291,8 @@ public class Player extends Actor {
 
     public int getxMomentum() { return xMomentum; }
 
+    public int getyMomentum() { return yMomentum; }
+
     public Rectangle getRect(boolean small) {
         if(small)
             return new Rectangle(getX() + 2, getY() + 2, getWidth() - 4, getHeight() - 4);
@@ -338,6 +347,7 @@ public class Player extends Actor {
 
     private void drawFireball(Batch batch, float parentAlpha) {
         float x = mainGame.getCamera().position.x - 312;
+        float y = mainGame.getCamera().position.y - 240;
         if(weaponAnim > 6 && weaponAnim < 13) {
             DEBUG_RENDER.setAutoShapeType(true);
             batch.end();
@@ -348,7 +358,7 @@ public class Player extends Actor {
             float width = 8 * (weaponAnim - 6);
             if(weaponAnim < 6)
                 width = 0;
-            DEBUG_RENDER.rect(getX() + (dir ? -width : 32) - x, getY() - 32 + getHeight(), width, 32);
+            DEBUG_RENDER.rect(getX() + (dir ? -width : 32) - x, getY() - 32 + getHeight() - y, width, 32);
             DEBUG_RENDER.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
             batch.begin();
@@ -382,6 +392,38 @@ public class Player extends Actor {
                 }
             }
 
+        }
+        weaponHeld = PlatformGame.buttonsDown[5];
+    }
+
+    private void actVoidBall() {
+        if(!weaponHeld && PlatformGame.buttonsDown[5]) {
+            if(weaponAnim == 1)
+                weaponAnim = 0;
+            else {
+                weaponAnim = 1;
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        Actor a = new Actor() {
+                            private Sprite spr = new Sprite(Player.this.spr.getTexture());
+
+                            @Override
+                            public void draw(Batch batch, float parentAlpha) {
+                                spr.setRegion(256, 0, 32, 32);
+                                spr.setSize(32, 32);
+                                spr.setPosition(getX(), getY());
+                                spr.draw(batch, parentAlpha);
+                                if(weaponAnim == 0)
+                                    remove();
+                            }
+                        };
+                        a.setPosition(getX(), getY() + getHeight() - 32);
+                        a.addAction(Actions.sequence(Actions.moveBy(64 * (dir ? -1 : 1) + (xMomentum * 0.15f / Gdx.graphics.getDeltaTime()), 0, 0.15f), Actions.run(() -> weaponAnim = 0), Actions.removeActor()));
+                        getParent().addActor(a);
+                    }
+                }, Gdx.graphics.getDeltaTime());
+            }
         }
         weaponHeld = PlatformGame.buttonsDown[5];
     }

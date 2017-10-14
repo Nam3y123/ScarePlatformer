@@ -16,5 +16,11 @@
 		"active": 2,
 		"icon": [64, 12],
 		"color": 0
-	}
+	},
+	{
+		"class": "com.platform.Weapon",
+		"active": 3,
+		"icon": [100, 24],
+		"color": 3
+	},
 ]

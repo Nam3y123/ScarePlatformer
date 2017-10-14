@@ -1,20 +1,20 @@
 
 ShortEnemy.png
-size: 64,64
+size: 64,24
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Stand1
   rotate: false
   xy: 0, 2
-  size: 96, 32
-  orig: 96, 32
+  size: 64, 24
+  orig: 64, 24
   offset: 0, 0
   index: -1
 Hurt
   rotate: false
-  xy: 96, 2
-  size: 96, 32
-  orig: 96, 32
+  xy: 64, 2
+  size: 64, 24
+  orig: 64, 24
   offset: 0, 0
   index: -1
