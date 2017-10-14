@@ -1,0 +1,63 @@
+[
+	{
+		"class": "com.platform.StartPoint",
+		"x": 10944,
+		"y": 3768
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 9096,
+		"y": 1944
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 9864,
+		"y": 984
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 9888,
+		"y": 744,
+		"watcher": true
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 10752,
+		"y": 744
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 6984,
+		"y": 1488
+		"onCeiling": true
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 6648,
+		"y": 1512,
+		"onCeiling": true
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 5856,
+		"y": 2016,
+		"onCeiling": true
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 5784,
+		"y": 1944
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 6672,
+		"y": 2712,
+		"watcher": true
+	},
+	{
+		"class": "com.platform.Enemies.SpeedyBoi",
+		"x": 6696,
+		"y": 1968,
+		"watcher": true
+	},
+]
